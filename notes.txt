@@ -1,0 +1,15 @@
+GNNs:
+Esse tipo de rede neural usa uma representação dos dados que é capaz de levar em conta a relação entre as amostras.
+
+Em um grafo, cada nó representaria uma galáxia, e cada linha (edge) representaria a relação entre galáxias. Essa relação pode ser modelada usando a proximidade espacial ou a semelhança de suas propriedades, dado que galáxias na mesma região podem pertencer à mesma estrutura da LSS.
+
+A vantagem sobre os métodos tradicionais (TF ou ML) é que estes métodos usam a informação de apenas um objeto, de forma independente, para fazer as predições. Já redes em grafos, devido à estrutura dos dados em forma de grafos, conseguem incorporar informação da estrutura desse grafo, de forma que cada estimativa não é feita de forma isolada (por exemplo, se uma galáxia faz parte de um aglomerado, a GNN pode usar a informação que as galáxias próximas talvez tenham redshifts parecidos e usar isso para refinar as predições).
+
+Além disso, GNNs acabam sendo mais robustas à ruído ou dados faltantes devido à característica de agregar informação de vários vizinhos de um nó.
+
+Um ponto interessante é a capacidade de modelar relações de mais alta dimensão, como em casos nos quais o z depende de fatores que vão além da fotometria da galáxia, como efeitos do ambiente.
+
+A maior dificuldade é a criação do grafo que, se não for bem pensada, leva a resultados ruins.
+
+- Também não dependem de uma estruturação dos dados em grids, como no caso das DDPMs.
+- Possibilidade de transfer-learning.

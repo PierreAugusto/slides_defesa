@@ -1,0 +1,337 @@
+% !TeX root = ../main.tex
+
+\documentclass[t, compress, xcolor={table,dvipsnames}, aspectratio=169, 10pt]{beamer}
+%\includeonlyframes{current}
+
+\setbeamercovered{transparent} % Transparent pauses
+% To change document language
+\usepackage[portuguese]{babel}
+% To include special characters directly from the keyboard (for portuguese language)
+\usepackage[utf8]{inputenc}
+% To include figures (not necessary in Beamer)
+%\usepackage{graphicx}
+% To include SVG images
+\usepackage[notransparent]{svg}
+% Hyperlinks
+\usepackage{hyperref}
+% To improve the positioning of figures
+\usepackage{float}
+% To adjust the page layout
+\usepackage{geometry}
+% To create better mathematical formulas
+\usepackage{amsmath}
+% To include more symbols in mathematical formulas
+\usepackage{amssymb}
+% To include links
+\usepackage{url}
+% To include PDF pages
+\usepackage{pgfpages}
+% % Apendix
+% \usepackage{appendixnumberbeamer}
+% To adjust the enumerate style
+\usepackage{enumerate}
+% To allow color changes in the text
+\usepackage{color}
+% To create improved tables
+\usepackage{booktabs,multirow,threeparttable}
+% To have the hability to include captions in non-floats
+%\usepackage{capt-of}
+\usepackage{subcaption}
+\usepackage[font=scriptsize]{caption}
+% Strikethrough text
+\usepackage[normalem]{ulem}
+% Coloured boxes
+\usepackage{tcolorbox}
+% % To include python codes
+% \usepackage{minted}
+% \usemintedstyle{monokai}
+% \definecolor{MintedBG}{gray}{0.2}
+% \definecolor{MintedNumbBG}{gray}{0.6}
+% %https://tex.stackexchange.com/questions/173850/problem-in-adding-a-background-color-in-a-minted-environment
+% \usepackage{tcolorbox}
+% \tcbuselibrary{minted,skins}
+% \newtcblisting{PyCode}[1][]{
+%   listing engine=minted,
+%   colback=MintedBG,
+%   colframe=black!70,
+%   listing only,
+%   minted style=monokai,
+%   minted language=python,
+%   minted options={linenos=true,numbersep=3mm,texcl=true,#1},
+%   left=5mm,enhanced,
+%   overlay={\begin{tcbclipinterior}\fill[MintedNumbBG] (frame.south west)
+%             rectangle ([xshift=5mm]frame.north west);\end{tcbclipinterior}}
+% }
+% To change the font of the slides
+\usepackage{fontspec}
+% The Inter font
+\usepackage{inter}
+% To define the citation style
+\usepackage[style=authoryear]{biblatex}
+%\addbibresource{TexFiles/Bibliography.bib}
+% To include lipsum text
+\usepackage{lipsum}
+% To use the \num number formatter
+\usepackage{siunitx}
+% To justify slides
+\usepackage{ragged2e}
+\apptocmd{\frame}{}{\justifying}{}
+% To reduce the space between ToC items
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\beamer@sectionintoc}{\vskip1.5em}{\vskip1.3em}{}{}
+\makeatother
+% Tikz to draw fluxograms
+\usepackage{tikz}
+\usetikzlibrary{shapes,arrows}
+\usetikzlibrary{calc}
+\usetikzlibrary{fadings}
+\usetikzlibrary {arrows.meta,bending,positioning}
+
+% Defining the dark theme (and other slide settings)
+\definecolor{primary}{RGB}{219, 29 29} % Primary color
+\definecolor{SPLUSRed}{RGB}{219, 29, 29} % First (start) color of progress bar gradient
+\definecolor{SPLUSBlue}{RGB}{72, 33, 214} % Second (end) color of progress bar gradient
+\definecolor{LightGray}{RGB}{179, 179, 179} % Color of the background of the progress bar and email+institute at bottom of slides
+
+\usetheme[background=dark]{metropolis} % Dark Metropolis theme
+\metroset{progressbar=foot} % Progress bar on page footer
+
+\usecolortheme[named=primary]{structure}
+
+% To make the tile, institute, date, author and subtitle boxes transparent
+\setbeamercolor{title}{bg=}
+\setbeamercolor{institute}{bg=}
+\setbeamercolor{date}{bg=}
+\setbeamercolor{author}{bg=}
+\setbeamercolor{subtitle}{bg=}
+% The color of the progress bar
+\setbeamercolor{progress bar}{fg=primary}
+% The color of the title (of the slides). Primary in the background, with white letters
+\setbeamercolor{frametitle}{bg=, fg=white}
+% The color of the text
+\setbeamercolor{normal text}{fg=white}
+
+% Setting the geometry of the slides (0.6 border on the left and right)
+\geometry{left=0.6cm, right=0.6cm}
+
+% To put a number on figures
+\setbeamertemplate{caption}[numbered]
+
+% This line sets the background of the slides (except the title slide)
+\usebackgroundtemplate
+{
+    \includegraphics[width=\paperwidth,height=\paperheight]{images/Slides/Conteudo1_Azul.png}
+    %\includegraphics[width=\paperwidth,height=\paperheight]{images/Slides/Conteúdo1_SemCor_Azul.png}
+    %\includegraphics[width=\paperwidth,height=\paperheight]{images/Slides/Conteúdo2_Azul.png}
+    %\includegraphics[width=\paperwidth,height=\paperheight]{images/Slides/Conteúdo2_SemCor_Azul.png}
+}
+
+%%%%%%%%%%%%%%%%%
+% Other settings
+\makeatletter
+
+% The size of progress bar and separators of the Metropolis theme
+\setlength{\metropolis@progressinheadfoot@linewidth}{4pt}
+\setlength{\metropolis@titleseparator@linewidth}{3pt}
+\setlength{\metropolis@progressonsectionpage@linewidth}{4pt}
+
+% Reducing space between the frame and the frame title
+%https://tex.stackexchange.com/questions/369090/reduce-space-between-mini-frame-and-frame-title
+\setbeamertemplate{frametitle}{
+  \nointerlineskip
+  \begin{beamercolorbox}[
+      wd=\paperwidth,
+      sep=0pt,
+      leftskip=.3cm,
+      ht=.8cm,
+      dp=0ex,
+    ]{frametitle}
+  \insertframetitle
+  \nolinebreak
+  \end{beamercolorbox}
+  }
+
+% Custom title page
+\setbeamertemplate{title page}{
+  \vbox{}
+  \vfill
+  \begingroup
+  \vspace{3cm}
+    \begin{minipage}{\textwidth}
+    % This minipage contains the title and subtitle
+    \begin{beamercolorbox}[sep=8pt, left]{title}
+      \usebeamerfont{title}\inserttitle\par%
+      \ifx\insertsubtitle\@empty%
+      \else%
+        \vskip0.25em%
+        {\usebeamerfont{subtitle}\usebeamercolor[fg]{subtitle}\insertsubtitle\par}%
+      \fi%     
+    \end{beamercolorbox}%
+    \end{minipage}
+
+    \vskip0pt plus 1filll
+    \noindent%
+    \begin{minipage}{.65\textwidth}
+    % This minipage has two columns. One (left) with the author, institute (long) and date, and the other (right) with the founding agency logo
+    \begin{beamercolorbox}[sep=8pt, left]{infos}
+      \usebeamerfont{author}\insertauthor\\
+      \usebeamerfont{institute}\insertinstitute\\
+      \usebeamerfont{date}\insertdate
+    \end{beamercolorbox}
+    \end{minipage}
+    \hfill%
+    \begin{minipage}{0.30\linewidth}
+    {\hfill\includegraphics[width=0.7\linewidth]{images/Logo_CNPq.png}}
+    \end{minipage}
+    \vspace{0.5cm}
+  \endgroup
+}
+
+% Color gradient of progress bars
+% https://www.reddit.com/r/LaTeX/comments/j2t15h/gradient_in_metropolis_beamer_progress_bar/
+\def\lenn{60pt}
+\pgfdeclarehorizontalshading{SPLUS}{\paperheight}{
+color(0pt)=(SPLUSRed); color(\lenn)=(SPLUSBlue)}
+
+% Footer progress bar
+\setbeamertemplate{progress bar in head/foot}{
+    \nointerlineskip
+    \setlength{\metropolis@progressinheadfoot}{%
+    \paperwidth * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}%
+    }%
+    \begin{beamercolorbox}[wd=\paperwidth]{progress bar in head/foot}
+    \begin{tikzpicture}[shading=SPLUS]
+        \fill[LightGray] (0,0) rectangle (\paperwidth, \metropolis@progressinheadfoot@linewidth);
+        \shade (0,0) rectangle (\metropolis@progressinheadfoot, \metropolis@progressinheadfoot@linewidth);
+    \end{tikzpicture}%
+    \end{beamercolorbox}
+}
+
+% Section page progress bar
+\setbeamertemplate{progress bar in section page}{
+    \nointerlineskip
+    \setlength{\metropolis@progressonsectionpage}{%
+    0.5\paperwidth * \ratio{\insertframenumber pt}{\inserttotalframenumber pt}%
+    }%
+    \vspace{.5cm}
+    \begin{beamercolorbox}[wd=0.5\paperwidth]{progress bar in section page}
+    \begin{tikzpicture}[shading=SPLUS]
+        \fill[LightGray] (0,0) rectangle (0.5\paperwidth, \metropolis@progressonsectionpage@linewidth);
+        \shade (0,0) rectangle (\metropolis@progressonsectionpage, \metropolis@progressonsectionpage@linewidth);
+    \end{tikzpicture}%
+    \end{beamercolorbox}
+}
+
+% \makeatother
+\DeclareSIUnit{\angstrom}{\textup{\AA}} % Angstrom unit, to be used with the siunitx package
+% % End of other settings
+% %%%%%%%%%%%%%%%%%%%%%%%
+
+% % Remove bottom navigation symbols
+% \setbeamertemplate{navigation symbols}{}
+
+% Add the email and short institute to the bottom of the slide
+\setbeamertemplate{frame footer}{\textcolor{LightGray}{\vspace{-0.2cm}\insertshortauthor~(\insertshortinstitute)}}
+
+% Change Beamer bullets, adjust spacing and change color
+\setbeamertemplate{itemize item}[circle]
+\setbeamertemplate{itemize subitem}{\raisebox{0.08cm}{\tiny$\blacktriangleright$}}
+
+% %\setbeamertemplate{itemize item}{\color{SPLUSRed}$\bullet$}
+% %\setbeamertemplate{itemize subitem}{\color{SPLUSBlue}$\bullet$}
+
+% Change spacing between items in the itemize environment
+\let\olditemize=\itemize \let\endolditemize=\enditemize \renewenvironment{itemize}{\olditemize \itemsep0em}{\endolditemize}
+
+%https://tex.stackexchange.com/questions/5941/changing-left-margin-in-itemize-environment-of-beamer-class
+\settowidth{\leftmargini}{\usebeamertemplate{itemize item}}
+\addtolength{\leftmargini}{2\labelsep}
+
+% Defining custom fonts
+%\newfontfamily\robotobold{Roboto Condensed Bold}
+%\newfontfamily\inter{Inter}
+
+\newfontfamily\robotobold[
+  Path = ./fonts/,
+  Extension = .ttf,
+  UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  ItalicFont = *-Italic
+]{RobotoCondensed}
+\newfontfamily\inter[
+  Path = ./fonts/,
+  Extension = .ttf,
+  UprightFont = *-Regular,
+  BoldFont = *-Bold,
+  ItalicFont = *-Italic
+]{Inter}
+
+% Roboto for the title and subtitle
+\setbeamerfont{title}{family=\robotobold, size={\fontsize{26}{24}}, series=\bfseries}
+\setbeamerfont{subtitle}{family=\robotobold, size={\fontsize{18}{16}}, series=\bfseries}
+\setbeamerfont{section title}{family=\robotobold, size={\fontsize{20}{18}}}
+\setbeamerfont{frametitle}{family=\robotobold, size={\fontsize{17}{0}}}
+
+% Inter for the other text
+\setbeamerfont{author}{family=\inter}
+\setbeamerfont{institute}{family=\inter}
+\setbeamerfont{date}{family=\inter}
+\setbeamerfont{normal text}{family=\inter}
+\usefonttheme[onlymath]{serif}
+
+\AtBeginDocument{\usebeamerfont{normal text}}
+
+\let\tempone\itemize
+\let\temptwo\enditemize
+\renewenvironment{itemize}{\tempone\addtolength{\itemsep}{0.5\baselineskip}}{\temptwo}
+
+% Color boxes
+% https://tex.stackexchange.com/questions/66154/how-to-construct-a-coloured-box-with-rounded-corners
+\tcbset{colback=SPLUSBlue!10!black, 
+        colframe=SPLUSBlue!40!black, 
+        coltext=white,
+        left=1mm,
+        right=1mm}
+
+\newtcolorbox{splusbox}[1]{colback=SPLUSBlue!10!black, colframe=SPLUSBlue!40!black, 
+                           coltext=white,
+                           left=1mm,
+                           right=1mm,
+                           lefttitle=0.1mm,
+                           title=#1}
+
+\newtcolorbox{splusbox2}[1]{colback=SPLUSBlue!10!black, colframe=SPLUSBlue!40!black, 
+                           coltext=white,
+                           left=0.5cm,
+                           lefttitle=0.1mm,
+                           title=#1}
+
+\setlength\parskip{\baselineskip} % for example
+
+% https://tex.stackexchange.com/questions/55589/text-justify-in-beamer
+\apptocmd{\frame}{}{\justifying}{} % Allow optional arguments after frame.
+\apptocmd{\column}{}{\justifying}{} % Allow optional arguments after frame.
+\apptocmd{\itemize}{}{\justifying}{} % Allow optional arguments after frame.
+
+% Ending slide
+% https://tex.stackexchange.com/a/338461
+\setbeamertemplate{endpage}{%
+\usebackgroundtemplate{
+    \includegraphics[width=\paperwidth,height=\paperheight]{images/Slides/Capa3_Azul.png}
+    }
+      \begin{frame}[c]
+        \centering
+        \vspace{1cm}
+        {\Huge \textbf{Obrigado!}}
+      \end{frame}
+
+  \usebackgroundtemplate{
+      \includegraphics[width=\paperwidth,height=\paperheight]{images/Slides/Conteúdo1_Azul.png}
+    }
+  }
+%\usebeamertemplate{endpage}
+
+% Adjust itemize left margin
+\settowidth{\leftmargini}{\usebeamertemplate{itemize item}}
+\addtolength{\leftmargini}{\labelsep}
