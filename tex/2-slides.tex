@@ -4,22 +4,19 @@
 \section{Visão geral}
 \begin{frame}[c]{Visão geral}
     \begin{columns}[c]
-        \vspace*{-0.5cm}
         \begin{column}{0.48\linewidth}
             \begin{splusbox}{}
                 \begin{itemize}
                     \item Introdução
                     \begin{itemize}
-                        \item Contexto cosmológico
-                        \item Estrutura em larga escala
-                        \item Redshifts espectroscópicos e fotométricos
+                        \item Galáxias anãs ultra-compactas (UCDs)
+                        \item Galáxias compactas com emissão
                     \end{itemize}
-                    \item Objetivo
                     \item Dados
                     \begin{itemize}
-                        \item Fotométricos e espectroscópicos
-                        \item Pré-processamento
-                        \item Pesos por objeto
+                        \item Fotometria S-PLUS
+                        \item Correções e cortes de qualidade
+                        \item Distribuição das UCDs
                     \end{itemize}
                 \end{itemize}
             \end{splusbox}
@@ -28,39 +25,101 @@
         \begin{column}{0.48\linewidth}
             \begin{splusbox}{}
                 \begin{itemize}
-                    \item Metodologia
-                    \begin{itemize}
-                        \item Redes neurais
-                        \item Redes neurais Bayesianas
-                        \item Redes de mistura de densidades
-                    \end{itemize}
-                    \item Resultados
-                    \begin{itemize}
-                        \item Redshifts fotométricos
-                        \item Funções de densidade de probabilidade
-                        \item Estrutura em larga escala
-                    \end{itemize}
+                    \item Aprendizado de máquina
+                    \item Seleção das candidatas
+                    \item Observações espectroscópicas
+                    \item Objetos compactos com emissão
                     \item Conclusões e perspectivas
                 \end{itemize}
             \end{splusbox}
         \end{column}
     \end{columns}
-
- \end{frame}
+\end{frame}
 
 \section{Introdução}
-\begin{frame}[c]{O contexto cosmológico}
-    \begin{splusbox}{}
-        Estudar a formação e evolução da estrutura em larga escala (LSS) é fundamental para entender o Universo em que vivemos. A partir dela podemos ter insights sobre:
+
+
+\begin{frame}[c]{O que são UCDs?}
+    \begin{itemize}
+        \item Galáxias anãs ultra-compactas (UCDs)
+        \item Objetos intermediários entre galáxias anãs e aglomerados globulares
+        \item Descobertas em aglomerados como Fornax e Virgo
+        \item Propriedades:
         \begin{itemize}
-            \item Matéria escura
-            \item Energia escura
-            \item Evolução cósmica
-            \item Formação e evolução de galáxias
-            \item Física a nível fundamental
+            \item Massas: $10^6$ a $10^8$ $M_\odot$
+            \item Raios: 7 a 100 pc
+            \item Populações estelares antigas
         \end{itemize}
-    \end{splusbox}
+    \end{itemize}
+    \vspace{0.5cm}
+    \centering
+    % \includegraphics[width=0.5\textwidth]{Images/ucds_exp/UCD_M60.png}
+    % Espaço para imagem de UCD
 \end{frame}
+
+% Slide 2: Formação e Cenários Evolutivos das UCDs
+\begin{frame}[c]{Formação das UCDs}
+    \begin{itemize}
+        \item Possíveis origens:
+        \begin{itemize}
+            \item Núcleos remanescentes de galáxias anãs despojadas
+            \item Aglomerados globulares massivos
+        \end{itemize}
+        \item Diversidade de propriedades sugere múltiplos canais de formação
+    \end{itemize}
+    \vspace{0.5cm}
+    \centering
+    \includegraphics[width=0.4\textwidth]{images/continuo_evolution_dwarf.png}
+\end{frame}
+
+\begin{frame}[c]{Galáxias compactas com emissão}
+    \begin{itemize}
+        \item Exemplos: BCDs (Blue Compact Dwarfs), Green Peas
+        \item Características:
+        \begin{itemize}
+            \item Ricas em gás
+            \item Intensos surtos de formação estelar
+            \item Espectros dominados por linhas de emissão (H$\alpha$, [OIII], etc.)
+        \end{itemize}
+        \item Análogas locais de galáxias do universo primordial
+    \end{itemize}
+    \vspace{0.5cm}
+    \centering
+    % \includegraphics[width=0.4\textwidth]{indroduction/BCD.png}
+\end{frame}
+
+\begin{frame}{UCDs vs. Galáxias com emissão}
+    \begin{columns}
+        \column{0.5\textwidth}
+        \textbf{UCDs}
+        \begin{itemize}
+            \item Espectros dominados por linhas de absorção
+            \item Populações estelares antigas
+            \item Pouca ou nenhuma formação estelar atual
+        \end{itemize}
+        \column{0.5\textwidth}
+        \textbf{Galáxias compactas com emissão}
+        \begin{itemize}
+            \item Espectros dominados por linhas de emissão
+            \item Formação estelar ativa
+            \item Baixa metalicidade
+        \end{itemize}
+    \end{columns}
+\end{frame}
+
+
+% \begin{frame}[c]{O contexto cosmológico}
+%     \begin{splusbox}{}
+%         Estudar a formação e evolução da estrutura em larga escala (LSS) é fundamental para entender o Universo em que vivemos. A partir dela podemos ter insights sobre:
+%         \begin{itemize}
+%             \item Matéria escura
+%             \item Energia escura
+%             \item Evolução cósmica
+%             \item Formação e evolução de galáxias
+%             \item Física a nível fundamental
+%         \end{itemize}
+%     \end{splusbox}
+% \end{frame}
 
 % \begin{frame}[c]{Estrutura em larga escala}
 %     A teia cósmica, ou a LSS, é formada por diferentes componentes. Cada componente apresenta caracteristicas e possui papéis diferentes na evolução do Universo como um todo.
@@ -118,124 +177,57 @@
 % \end{frame}
 
 
-\begin{frame}[c]{Redshifts espectroscópicos e suas limitações}
-    Uma forma de determinar a distância de objetos celestes vêm da lei de Hubble Lemaître (válida para objetos próximos):
-    \vspace*{-0.5cm}
-    \begin{figure}
-        \centering
-        \includegraphics[width=0.8\linewidth]{script/images/hubble_law.png}
-    \end{figure}
-    \vspace*{-0.5cm}
-    \begin{splusbox}{}
-        \centering
-        A observação de um espectro com alto sinal ruído demanda bastante tempo de observação, ainda mais para objetos fracos
+% \begin{frame}[c]{Redshifts espectroscópicos e suas limitações}
+%     Uma forma de determinar a distância de objetos celestes vêm da lei de Hubble Lemaître (válida para objetos próximos):
+%     \vspace*{-0.5cm}
+%     \begin{figure}
+%         \centering
+%         \includegraphics[width=0.8\linewidth]{script/images/hubble_law.png}
+%     \end{figure}
+%     \vspace*{-0.5cm}
+%     \begin{splusbox}{}
+%         \centering
+%         A observação de um espectro com alto sinal ruído demanda bastante tempo de observação, ainda mais para objetos fracos
 
-        \vspace{0.3cm}
-        É necessário encontrar uma alternativa
-    \end{splusbox}
-\end{frame}
+%         \vspace{0.3cm}
+%         É necessário encontrar uma alternativa
+%     \end{splusbox}
+% \end{frame}
 
-\begin{frame}[c]{A alternativa: redshifts fotométricos}
-    %\hspace*{1cm}
-    \begin{columns}[c]
-        \begin{column}{0.46\linewidth}
-            \justifying
-            Existem uma série de projetos que se baseiam em fotometria para produzir ciência.
-            \begin{itemize}
-                \justifying
-                \item Pode ser considerada uma "aproximação" do espectro
-                \item É obtida de forma muito mais rápida
-                \item Pode alcançar magnitudes mais fracas
-                \item É capaz de gerar dados para muitos objetos e grandes áreas
-            \end{itemize}
-        \end{column}
-        \hspace*{-0.5cm}
-        \begin{column}{0.46\linewidth}
-            \begin{figure}
-                \centering
-                \includegraphics[height=5.5cm]{script/images/splus_spectra_sed.png}
-                \caption{Mendes de Oliveira et al. (2019).}
-            \end{figure}
-        \end{column}
-    \end{columns}
-\end{frame}
+% \section{O objetivo}
+% \begin{frame}[c]{O objetivo}
+%     \begin{columns}[c]
+%         \begin{column}{0.46\linewidth}
+%             \begin{splusbox}{Redshifts fotométricos}
+%                 \begin{itemize}
+%                     \justifying
+%                     \item Determinação de redshifts fotométricos de alta precisão
+%                     \item Funções de densidade de probabilidade bem calibradas
+%                     \item Galáxias até $z=0.8$ e magnitude 21 na banda \texttt{r}
+%                 \end{itemize}
+%             \end{splusbox}
+%         \end{column}
+%         \begin{column}{0.46\linewidth}
+%             \begin{splusbox}{Estrutura em larga escala}
+%                 \begin{itemize}
+%                     \justifying
+%                     \item Utilizar dados fotométricos para a reconstrução da LSS
+%                     \item Obter um mapeamento similar ao visto usando $z_\text{spec}$
+%                     %\item Possibilitar estudos que abrangem diferentes áreas da cosmologia
+%                 \end{itemize}
+%                 %Recuperação das estrutura da LSS, tal como vemos usando $z_\text{spec}$, a partir de estimativas fotométricas
+%             \end{splusbox}
+%         \end{column}
+%     \end{columns}
 
-\begin{frame}[c]{A alternativa: redshifts fotométricos}
-    Redshifts fotométricos são estimados por três tipos de algoritmos: aprendizado de máquina, ajuste de templates e códigos híbridos.
-
-    \begin{columns}[c]
-        \footnotesize
-        \begin{column}{0.46\textwidth}
-            \begin{splusbox}{Aprendizado de máquina (ML)}
-                \begin{itemize}
-                    \justifying
-                    \item[$\checkmark$] Se baseiam no uso de uma amostra de treinamento
-                    \item[$\checkmark$] Flexível em relação a modelos (RFs, KNNs, SVMs)
-                    \item[$\checkmark$] Podem ser mais precisos e rápidos que modelos de ajuste de template
-                    \item[$\times$] Não fornecem uma classificação do objeto (exceto caso seja configurado para isso)
-                    \item[$\times$] Sujeito à vieses devido aos dados
-                \end{itemize}
-            \end{splusbox}
-        \end{column}
-
-        \begin{column}{0.46\textwidth}
-            \begin{splusbox}{Ajuste de templates (TF)}
-                \begin{itemize}
-                    \justifying
-                    \item[$\checkmark$] Fazem uma comparação entre a fotometria de um objeto e uma biblioteca de templates
-                    \item[$\checkmark$] Fornecem uma classificação do objeto junto ao $z_\text{phot}$
-                    \item[$\checkmark$] Maior capacidade de extrapolação
-                    \item[$\times$] Menos precisos, mais lentos
-                    \item[$\times$] Sujeito à vieses devido à escolha dos templates
-                \end{itemize}
-            \end{splusbox}
-        \end{column}
-
-        % \begin{column}{0.33\linewidth}
-        %     \begin{splusbox}{Híbridos}
-        %         \footnotesize
-        %         \begin{itemize}
-        %             \item Combinam características de ML e TF
-        %             \item Alguns códigos usam ML para gerar templates para um código de TF, outros usam templates para criar dados a serem usados num modelo de ML
-        %         \end{itemize}
-        %     \end{splusbox}
-        % \end{column}
-    \end{columns}
-\end{frame}
-
-\section{O objetivo}
-\begin{frame}[c]{O objetivo}
-    \begin{columns}[c]
-        \begin{column}{0.46\linewidth}
-            \begin{splusbox}{Redshifts fotométricos}
-                \begin{itemize}
-                    \justifying
-                    \item Determinação de redshifts fotométricos de alta precisão
-                    \item Funções de densidade de probabilidade bem calibradas
-                    \item Galáxias até $z=0.8$ e magnitude 21 na banda \texttt{r}
-                \end{itemize}
-            \end{splusbox}
-        \end{column}
-        \begin{column}{0.46\linewidth}
-            \begin{splusbox}{Estrutura em larga escala}
-                \begin{itemize}
-                    \justifying
-                    \item Utilizar dados fotométricos para a reconstrução da LSS
-                    \item Obter um mapeamento similar ao visto usando $z_\text{spec}$
-                    %\item Possibilitar estudos que abrangem diferentes áreas da cosmologia
-                \end{itemize}
-                %Recuperação das estrutura da LSS, tal como vemos usando $z_\text{spec}$, a partir de estimativas fotométricas
-            \end{splusbox}
-        \end{column}
-    \end{columns}
-
-    \centering
-    \begin{splusbox}{}
-        Expandir o conjunto de dados que podemos usar para estudos em diferentes áreas da astronomia
-    \end{splusbox}
-\end{frame}
+%     \centering
+%     \begin{splusbox}{}
+%         Expandir o conjunto de dados que podemos usar para estudos em diferentes áreas da astronomia
+%     \end{splusbox}
+% \end{frame}
 
 \section{Dados}
+
 \begin{frame}[c]{Dados fotométricos}
     \begin{figure}
         \centering
@@ -314,30 +306,6 @@
     \end{figure}
 \end{frame}
 
-\begin{frame}{Dados espectroscópicos {\small \textcolor{gray}{\url{(https://github.com/ErikVini/specz_compilation)}}}}
-    \begin{columns}[c]
-        \hspace{0.5cm}
-        \begin{column}{0.40\textwidth}
-            \begin{splusbox}{Informações do compilado}
-                \begin{itemize}
-                    \item Total de catálogos: 5097
-                    \item Catálogos usados: 1872
-                    \item Total de objetos: \mbox{8 437 460}
-                    \item \underline{Pré era GPT!}
-                \end{itemize}
-            \end{splusbox}
-        \end{column}
-        %\hspace{-0.5cm}
-        \begin{column}{0.50\textwidth}
-            \begin{figure}
-                \centering
-                \includegraphics[height=7cm]{script/images/specz_distributions.pdf}
-            \end{figure}
-        \end{column}
-    \end{columns}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \begin{frame}[c]{Distribuição das UCDs em Fornax}
     \begin{figure}
         \centering
@@ -384,7 +352,8 @@
 \end{frame}
 
 \begin{frame}[c]{Propriedades das UCDs}
-    \begin{table}[!ht]
+    \vspace{0.2cm}
+    \begin{table}[h]
         \centering
         \scriptsize
         \caption{Propriedades das UCDs de Mieske et al.(2008).}
@@ -456,6 +425,7 @@
 \end{frame}
 
 \section{Aprendizado de máquina}
+
 \begin{frame}[c]{Procura de UCDs com Aprendizado de Máquina}
     \begin{splusbox}{Objetivo}
         \begin{itemize}
@@ -776,7 +746,7 @@
     \begin{columns}
         \begin{column}{0.46\linewidth}
             \centering
-            \scriptsize
+            \footnotesize
             \textbf{Modelo Treinado}
             \begin{itemize}
                 \item Photo-z de \textit{Lima et al. 2022}. 
@@ -791,7 +761,7 @@
         \begin{column}{0.46\linewidth}
             \begin{figure}
                 \centering
-                \includegraphics[height=4.5cm]{script/images/splus_spectra_sed.png}
+                \includegraphics[height=5cm]{script/images/splus_spectra_sed.png}
                 \caption{Adaptado de Mendes de Oliveira et al. (2019).}
             \end{figure}
         \end{column}
@@ -802,7 +772,7 @@
     \vspace{0.5cm}
     \begin{figure}
         \centering
-        \includegraphics[width=0.8\linewidth, height=6cm, keepaspectratio]{images/overlaid_histogram_mags_aper_6_c.png}
+        \includegraphics[width=1.\linewidth, height=6cm, keepaspectratio]{images/overlaid_histogram_mags_aper_6_c.png}
         \caption{Distribuição magnitudes na amostra de treino \textit{photo\_z}.}
     \end{figure}
 \end{frame}
@@ -846,7 +816,7 @@
                 \includegraphics[width=\linewidth]{images/z_zml_distribution.png}
             \end{figure}
         \end{column}
-        \begin{column}{0.25\linewidth}
+        \begin{column}{0.3\linewidth}
             \begin{table}[!ht]
                 \centering
                 \scriptsize
@@ -877,8 +847,639 @@
     \end{columns}
 \end{frame}
 
+\begin{frame}[c]{Seleção das candidatas}
+
+\begin{columns}[c]
+    \begin{column}{0.48\textwidth}
+        \vspace{0.2cm}
+        \begin{splusbox}{\tiny Seleções aplicadas (Total 1.803.561 objetos)}
+            \tiny
+            \begin{itemize}
+                \item Corte de magnitude: $18 \leq r_\text{APER\_6} < 21$.
+                \item Extended Probability $> 0.9$.
+                \item Corte de FWHM: $FWHM_r \leq 2.5$ pixels.
+                \item \textit{photo\_z} $\leq 0.05$.
+            \end{itemize}
+        \end{splusbox}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+        \vspace{0.2cm}    
+        \begin{table}[!ht]
+            \centering
+            \tiny
+            \begin{tabular}{l l r r}
+                \hline
+                \multicolumn{4}{c}{$y = ax + b$}\\
+                \hline
+                y & x & a & b\\
+                \hline
+                FR (90\%-20\%) & r & -4.5 & 97 \\
+                FR (90\%-20\%) & r & -0.8 & 17 \\
+                FR (90\%-70\%) & FR 90\% & 0.7 & -0.8 \\
+                FR (90\%-70\%) & FR 90\% & 0.3 & -0.45 \\
+                FR (70\%-20\%) & FR (90\%-70\%) & 1.6 & 1 \\
+                FR (70\%-20\%) & FR (90\%-70\%) & 0.4 & 0.05 \\
+                \hline
+            \end{tabular}
+            \label{cortes_flux_radius}
+        \end{table}
+    \end{column}
+\end{columns}
+\begin{columns}[c]
+    \begin{column}{0.32\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=\linewidth]{images/f_90_20_R_APER_6.png}
+        \end{figure}
+    \end{column}
+    \begin{column}{0.32\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=\linewidth]{images/f_90_70_FLUX_RADIUS_90_R.png}
+        \end{figure}
+    \end{column}
+    \begin{column}{0.32\linewidth}
+        \begin{figure}
+            \centering
+            \includegraphics[width=\linewidth]{images/f_70_20_f_90_70.png}
+        \end{figure}
+    \end{column}
+\end{columns}
+
+\begin{center}
+    \footnotesize
+    \textbf{Total de objetos selecionados: 242.}
+\end{center}
+
+\end{frame}
+
+\begin{frame}[c]{Seleção das candidatas}
+\scriptsize
+Seleção com S-PLUS e classificações GAIA
+
+Seleção final: 14 candidatas
+\begin{columns}[c]
+        \begin{column}{0.48\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{images/photospec_ucds.png}
+            \end{figure}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \begin{figure}
+                \centering
+                \includegraphics[width=\textwidth]{images/photospec_candidatas.png}
+            \end{figure}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[c]{Seleção das candidatas}
+    \begin{figure}[]
+        \captionsetup{justification=centering}
+        \begin{subfigure}[b]{0.13\textwidth}
+            \includegraphics[width=\textwidth]{images/candidata_final/01.jpg}
+            \caption{Candidate 01}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.13\textwidth}
+            \includegraphics[width=\textwidth]{images/candidata_final/02.jpg}
+            \caption{Candidate 02}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.13\textwidth}
+            \includegraphics[width=\textwidth]{images/candidata_final/03.jpg}
+            \caption{Candidate 03}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.13\textwidth}
+            \includegraphics[width=\textwidth]{images/candidata_final/04.jpg}
+            \caption{Candidate 04}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.13\textwidth}
+            \includegraphics[width=\textwidth]{images/candidata_final/05.jpg}
+            \caption{Candidate 05}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.13\textwidth}
+            \includegraphics[width=\textwidth]{images/candidata_final/06.jpg}
+            \caption{Candidate 06}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.13\textwidth}
+            \includegraphics[width=\textwidth]{images/candidata_final/07.jpg}
+            \caption{Candidate 07}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.13\textwidth}
+            \includegraphics[width=\textwidth]{images/candidata_final/08.jpg}
+            \caption{Candidate 08}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.13\textwidth}
+            \includegraphics[width=\textwidth]{images/candidata_final/09.jpg}
+            \caption{Candidate 09}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.13\textwidth}
+            \includegraphics[width=\textwidth]{images/candidata_final/10.jpg}
+            \caption{Candidate 10}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.13\textwidth}
+            \includegraphics[width=\textwidth]{images/candidata_final/11.jpg}
+            \caption{Candidate 11}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.13\textwidth}
+            \includegraphics[width=\textwidth]{images/candidata_final/12.jpg}
+            \caption{Candidate 12}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.13\textwidth}
+            \includegraphics[width=\textwidth]{images/candidata_final/13.jpg}
+            \caption{Candidate 13}
+        \end{subfigure}
+        \begin{subfigure}[b]{0.13\textwidth}
+            \includegraphics[width=\textwidth]{images/candidata_final/14.jpg}
+            \caption{Candidate 14}
+        \end{subfigure}
+    \end{figure}
+\end{frame}
+
+\begin{frame}[c]{Análise das candidatas}
+\small
+\textbf{Catálogo Fornax (Castelli et al. 2024)}
+
+\begin{figure}
+    \includegraphics[width=\paperwidth,height=0.9\paperheight,keepaspectratio]{images/analise_junta.png}
+\end{figure}
+
+\end{frame}
 
 
+\begin{frame}[c]{Análise das candidatas}
+\small
+\textbf{Distribuição em Fornax}
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.\linewidth]{images/candidates_distribution.png}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}[c]{Conclusões sobre as candidatas UCDs}
+    \begin{itemize}
+        \item Apenas 1 das 14 candidatas está dentro do raio viral de Fornax;
+        \item As candidatas selecionadas apresentam características compatíveis com UCDs conhecidas.
+        \item Presença em regiões periféricas sugere que UCDs podem se formar em ambientes menos densos e migrar para o centro posteriormente.
+        \item Múltiplos cenários de formação possíveis:
+        \begin{itemize}
+            \item Fusão de superaglomerados estelares em regiões de menor densidade.
+            \item Colapso direto de nuvens de gás primordial.
+            \item Stripping de galáxias anãs nucleadas em ambientes densos.
+        \end{itemize}
+        \item Resultados reforçam a hipótese de múltiplos canais de formação para UCDs.
+        \item Descoberta de UCDs fora do raio viral amplia o conhecimento sobre sua distribuição e mecanismos de formação.
+    \end{itemize}
+\end{frame}
+
+\section{Observações espectroscópicas Candidatas UCDs}
+
+\begin{frame}[c]{Observações espectroscópicas}
+Amostra de candidatas a UCDs ({\scriptsize Projeto IC anterior})
+\vspace{-0.3cm}
+\begin{figure}
+    \captionsetup{justification=centering}
+    \centering
+    \begin{subfigure}[b]{0.11\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_1/UCG01.png}
+        \caption{Candidate 01}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.11\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_1/UCG02.png}
+        \caption{Candidate 02}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.11\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_1/UCG03.jpg}
+        \caption{Candidate 03}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.11\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_1/UCG04.jpg}
+        \caption{Candidate 04}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.11\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_1/UCG05.jpg}
+        \caption{Candidate 05}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.11\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_1/UCG06.jpg}
+        \caption{Candidate 06}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.11\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_1/UCG07.jpg}
+        \caption{Candidate 07}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.11\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_1/UCG08.jpg}
+        \caption{Candidate 08}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.11\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_1/UCG09.jpg}
+        \caption{Candidate 09}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.11\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_1/UCG10.jpg}
+        \caption{Candidate 10}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.11\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_1/UCG11.jpg}
+        \caption{Candidate 11}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.11\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_1/UCG12.jpg}
+        \caption{Candidate 12}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.11\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_1/UCG13.jpg}
+        \caption{Candidate 13}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.11\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_1/UCG14.jpg}
+        \caption{Candidate 14}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.11\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_1/UCG15.jpg}
+        \caption{Candidate 15}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.11\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_1/UCG16.jpg}
+        \caption{Candidate 16}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.11\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_1/UCG17.jpg}
+        \caption{Candidate 17}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.11\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_1/UCG18.jpg}
+        \caption{Candidate 18}
+    \end{subfigure}
+\end{figure}
+\end{frame}
+
+\begin{frame}[c]{Observações espectroscópicas}
+Observações com o Gemini Sul
+\footnotesize
+\begin{itemize}
+    \item \textbf{Modo de Observação}: Fenda longa (\textit{long-slit}).
+    \item \textbf{Grating}: B600-G5303, com comprimento de onda central $\lambda_c = 550 \, \text{nm}$.
+    \item \textbf{Largura da Fenda}: 1,5".
+    \item \textbf{Resolução Espectral}: $R \sim 570$, considerando a largura da fenda escolhida.
+    \item \textbf{Intervalo Espectral}: 4000\,\text{Å} a 7000\,\text{Å}, cobrindo desde o azul até quase o vermelho.
+    \item \textbf{Tempo de Exposição por Objeto}: 1200 segundos, divididos em 3 exposições de 400 segundos cada.
+    \item \textbf{Condições de Observação}: IQ=ANY, CC=80\%, WV=ANY, SB=ANY.
+    \item \textbf{Razão Sinal-Ruído (S/N) Desejada}: Mínimo de 5 no espectro combinado (equivalente a S/N $\sim$ 3 por pixel espectral) no contínuo, suficiente para detectar o declive do contínuo azul e as principais linhas de absorção.
+\end{itemize}
+
+{\scriptsize Não foram observadas as candidatas UCG04, UCG09, UCG11, e UCG17.}
+\end{frame}
+
+\begin{frame}[c]{Observações espectroscópicas}
+\textbf{Fluxo de Redução dos Dados Espectroscópicos}
+
+\begin{enumerate}
+    \item \textbf{Seleção dos dados:} Escolha dos frames científicos e de calibração.
+    \item \textbf{Remoção do bias:} Subtração do bias para eliminar o sinal eletrônico de fundo.
+    \item \textbf{Correção de flat-field:} Correção da resposta pixel a pixel do detector usando imagens de flat.
+    \item \textbf{Calibração em comprimento de onda:} Utilização de lâmpadas de arco para calibrar o eixo espectral.
+    \item \textbf{Correção de resposta espectral:} Processamento dos dados da estrela padrão para correção da resposta instrumental e do fluxo.
+    \item \textbf{Redução dos dados científicos:} Aplicação das correções e calibrações aos espectros dos objetos de interesse.
+\end{enumerate}
+
+\end{frame}
+
+\begin{frame}[c]{Observações espectroscópicas}
+\begin{figure}
+    \captionsetup{justification=centering}
+    \centering
+    \begin{subfigure}[b]{0.31\textwidth}
+        \includegraphics[width=\textwidth]{images/espectros/UCG01.png}
+        \caption{Candidate 01}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.31\textwidth}
+        \includegraphics[width=\textwidth]{images/espectros/UCG02.png}
+        \caption{Candidate 02}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.31\textwidth}
+        \includegraphics[width=\textwidth]{images/espectros/UCG03.png}
+        \caption{Candidate 03}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.31\textwidth}
+        \includegraphics[width=\textwidth]{images/espectros/UCG05.png}
+        \caption{Candidate 05}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.31\textwidth}
+        \includegraphics[width=\textwidth]{images/espectros/UCG06.png}
+        \caption{Candidate 06}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.31\textwidth}
+        \includegraphics[width=\textwidth]{images/espectros/UCG07.png}
+        \caption{Candidate 07}
+    \end{subfigure}
+\end{figure}
+\end{frame}
+
+\begin{frame}[c]{Observações espectroscópicas}
+\begin{figure}
+    \captionsetup{justification=centering}
+    \centering
+    \begin{subfigure}[b]{0.31\textwidth}
+        \includegraphics[width=\textwidth]{images/espectros/UCG08.png}
+        \caption{Candidate 08}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.31\textwidth}
+        \includegraphics[width=\textwidth]{images/espectros/UCG10.png}
+        \caption{Candidate 10}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.31\textwidth}
+        \includegraphics[width=\textwidth]{images/espectros/UCG12.png}
+        \caption{Candidate 12}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.31\textwidth}
+        \includegraphics[width=\textwidth]{images/espectros/UCG13.png}
+        \caption{Candidate 13}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.31\textwidth}
+        \includegraphics[width=\textwidth]{images/espectros/UCG14.png}
+        \caption{Candidate 14}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.31\textwidth}
+        \includegraphics[width=\textwidth]{images/espectros/UCG15.png}
+        \caption{Candidate 15}
+    \end{subfigure}
+\end{figure}
+\end{frame}
+
+\begin{frame}[c]{Observações espectroscópicas}
+\begin{figure}
+    \captionsetup{justification=centering}
+    \centering
+    \begin{subfigure}[b]{0.31\textwidth}
+        \includegraphics[width=\textwidth]{images/espectros/UCG16.png}
+        \caption{Candidate 16}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.31\textwidth}
+        \includegraphics[width=\textwidth]{images/espectros/UCG18.png}
+        \caption{Candidate 18}
+    \end{subfigure}
+\end{figure}
+\end{frame}
+
+\begin{frame}[c]{Observações espectroscópicas}
+\begin{columns}[c]
+    \begin{column}{0.52\textwidth}
+        \begin{table}[!ht]
+            \centering
+            \footnotesize
+            \begin{tabular}{lcc}
+                \toprule
+                $OBJ_{name}$ & z   \\
+                \midrule
+                UCG01     & 0.0005 \\
+                UCG02     & 0.0004 \\
+                UCG03     & 0.147 \\
+                UCG05     & 0.02 \\
+                UCG06     & -0.0003 \\
+                UCG07     & -0.0003 \\
+                UCG08     & -0.0001 \\
+                UCG10     & 2.48 \\
+                UCG12     & 0.0995 \\
+                UCG13     & 0.0004 \\
+                UCG14     & 0.027 \\
+                UCG15     & 0.0006 \\
+                UCG16     & 0.0004 \\
+                UCG18     & 0.039 \\
+                \bottomrule
+            \end{tabular}
+            \label{redshift_candidatas_1}
+        \end{table}
+    \end{column}
+    \begin{column}{0.48\textwidth}
+        \small
+        Temos 9 classificados como estrelas (UCG01, UCG02, UCG06, UCG07, UCG08, UCG13, UCG15, UCG16), 1 como quasar (UCG10) e 5 como galáxias (UCG03, UCG05, UCG12, UCG14, UCG18). Das galáxias encontradas nessa amostra, nenhuma foi classificada como pertencente ao aglomerado de Fornax.
+    \end{column}
+\end{columns}
+\end{frame}
+
+\section{Objetos compactos com emissão}
+
+\begin{frame}[c]{Objetos compactos com emissão}
+Seleção de objetos compactos com sinais de linhas de emissão
+
+Identificação de objetos compactos azuis com evidências de linhas de emissão, como as Blue Compact Dwarf Galaxies (BCDs).
+
+As linhas de emissão mais sensíveis ao filtro $J0660$ do S-PLUS são H$\alpha$ e [OIII].
+
+A seleção foi realizada buscando objetos compactos com emissão em H$\alpha$ e/ou [OIII], utilizando o excesso de fluxo no filtro $J0660$ em relação aos filtros adjacentes.
+
+\begin{splusbox}{Seleção baseada em cor H$\alpha$}
+    \begin{equation}
+        \text{Color}_{\mathrm{H}\alpha} = J0660 - \frac{r + i}{2}
+        \label{equation_halpha_color}
+    \end{equation}
+    Objetos com $\text{Color}_{\mathrm{H}\alpha}$ significativamente negativos indicam emissão em H$\alpha$.
+\end{splusbox}
+
+\end{frame}
+
+\begin{frame}[c]{Objetos compactos com emissão}
+Seleção de objetos compactos com emissão
+\vspace{-0.5cm}
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering}
+    \begin{subfigure}[b]{0.25\textwidth}
+        \includegraphics[width=\textwidth]{images/photo_specs/Candidate_1.png}
+        \caption{Candidate\_1}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.25\textwidth}
+        \includegraphics[width=\textwidth]{images/photo_specs/Candidate_2.png}
+        \caption{Candidate\_2}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.25\textwidth}
+        \includegraphics[width=\textwidth]{images/photo_specs/Candidate_3.png}
+        \caption{Candidate\_3}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.25\textwidth}
+        \includegraphics[width=\textwidth]{images/photo_specs/Candidate_4.png}
+        \caption{Candidate\_4}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.25\textwidth}
+        \includegraphics[width=\textwidth]{images/photo_specs/Candidate_5.png}
+        \caption{Candidate\_5}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.25\textwidth}
+        \includegraphics[width=\textwidth]{images/photo_specs/Candidate_6.png}
+        \caption{Candidate\_6}
+    \end{subfigure}
+\end{figure}
+
+\end{frame}
+
+\begin{frame}[c]{Objetos compactos com emissão}
+\begin{figure}[h]
+    \centering
+    \captionsetup{justification=centering}
+    \begin{subfigure}[b]{0.22\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_2/Candidate_1.png}
+        \caption{Candidate\_1}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.22\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_2/Candidate_2.png}
+        \caption{Candidate\_2}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.22\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_2/Candidate_3.png}
+        \caption{Candidate\_3}
+    \end{subfigure}
+\end{figure}
+\vspace{-0.5cm}
+\begin{figure}[h]
+    \begin{subfigure}[b]{0.22\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_2/Candidate_4.png}
+        \caption{Candidate\_4}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.22\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_2/Candidate_5.png}
+        \caption{Candidate\_5}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.22\textwidth}
+        \includegraphics[width=\textwidth]{images/proposatal_candidatas_2/Candidate_6.png}
+        \caption{Candidate\_6}
+    \end{subfigure}
+\end{figure}
+
+\end{frame}
+
+
+\begin{frame}[c]{Observações espectroscópicas}
+Observações com o Gemini Sul (Fast Turn Around Program)
+\footnotesize
+\begin{itemize}
+    \item \textbf{Modo de Observação}: Fenda longa (\textit{long-slit}).
+    \item \textbf{Grating}: B600-G5323, com comprimento de onda central em 3 posições: $\lambda_c = 515 \, \text{nm}$, $\lambda_c = 550 \, \text{nm}$ e $\lambda_c = 585 \, \text{nm}$.
+    \item \textbf{Largura da Fenda}: 1".
+    \item \textbf{Resolução Espectral}: $R \sim 570$, considerando a largura da fenda escolhida.
+    \item \textbf{Intervalo Espectral}: 4000\,\text{Å} a 7000\,\text{Å}.
+    \item \textbf{Condições de Observação}: IQ=85\%, CC=70\%, WV=ANY, SB=80\%.
+    \item \textbf{Razão Sinal-Ruído (S/N) Desejada}: Mínimo de 3 no espectro combinado no contínuo, suficiente para detectar o declive do contínuo azul e as principais linhas de absorção.
+    \item \textbf{Número de Exposições}: Em cada comprimento de onda central, 1 exposição de 600 segundos cada, totalizando 3 exposições por objeto.
+\end{itemize}
+
+\end{frame}
+
+\begin{frame}[c]{Observações espectroscópicas}
+\vspace{0.1cm}
+\begin{figure}
+    \captionsetup{justification=centering}
+    \centering
+    \begin{subfigure}[b]{0.31\textwidth}
+        \includegraphics[width=\textwidth]{images/espectros/Candidate1.png}
+        \caption{Candidate 01}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.31\textwidth}
+        \includegraphics[width=\textwidth]{images/espectros/Candidate2.png}
+        \caption{Candidate 02}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.31\textwidth}
+        \includegraphics[width=\textwidth]{images/espectros/Candidate3.png}
+        \caption{Candidate 03}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.31\textwidth}
+        \includegraphics[width=\textwidth]{images/espectros/Candidate4.png}
+        \caption{Candidate 05}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.31\textwidth}
+        \includegraphics[width=\textwidth]{images/espectros/Candidate5.png}
+        \caption{Candidate 06}
+    \end{subfigure}
+    \begin{subfigure}[b]{0.31\textwidth}
+        \includegraphics[width=\textwidth]{images/espectros/Candidate6.png}
+        \caption{Candidate 07}
+    \end{subfigure}
+\end{figure}
+\end{frame}
+
+\begin{frame}[c]{Resultados compact emission galaxies}
+\begin{columns}[c]
+    \begin{column}{0.45\textwidth}
+        \begin{table}[h]
+            \centering
+            \begin{tabular}{lcc}
+                \toprule
+                $OBJ_{name}$ & z   \\
+                \midrule
+                Candidate\_1     & 0.309 \\
+                Candidate\_2     & 0.265 \\
+                Candidate\_3     & 0.327 \\
+                Candidate\_4     & 0.323 \\
+                Candidate\_5     & 0.308 \\
+                Candidate\_6     & 0.325 \\
+                \bottomrule
+            \end{tabular}
+        \end{table}
+    \end{column}
+    \begin{column}{0.55\textwidth}
+        \vspace{0.3cm}
+        \begin{itemize}
+            \item Todos os objetos apresentam sinais de emissão bem definidos.
+            \item Espectros mostram objetos azuis, com formação estelar recente e linhas de emissão intensas.
+            \item Redshifts entre 0.265 e 0.327: objetos estão distantes do aglomerado de Fornax.
+            \item Mesmo compactos, os objetos apresentam fortes linhas de emissão, indicando formação estelar recente.
+            \item Método eficiente para encontrar galáxias compactas com emissão em $z \sim 0.3$.
+        \end{itemize}
+    \end{column}
+\end{columns}
+\end{frame}
+
+\section{Conclusões e perspectivas}
+
+\begin{frame}[c]{Conclusões}
+    \scriptsize
+    \begin{columns}[t]
+        \begin{column}{0.48\textwidth}
+            \begin{splusbox}{Busca por UCDs em Fornax}
+                \begin{itemize}
+                    \item Busca sistemática por galáxias anãs ultra-compactas (UCDs) no aglomerado de Fornax, integrando:
+                    \begin{itemize}
+                        \scriptsize
+                        \item Análises fotométricas e morfológicas
+                        \item Aprendizado de máquina (Random Forest: AUC-ROC 0.97, MCC 0.84)
+                        \item Observações espectroscópicas (Gemini Sul)
+                    \end{itemize}
+                    \item Seleção de 14 novas candidatas principais a UCDs, com propriedades compatíveis com UCDs conhecidas.
+                    \item Candidatas apresentam distribuição espacial periférica.
+                    \item Metodologia eficaz e replicável para identificação de UCDs em outros levantamentos.
+                \end{itemize}
+            \end{splusbox}
+        \end{column}
+        \begin{column}{0.48\textwidth}
+            \begin{splusbox}{Objetos Compactos com Emissão}
+                \begin{itemize}
+                    \item Metodologia também eficiente para identificar galáxias compactas emissoras (possíveis BCDs).
+                    \item Inclusão de cortes envolvendo o filtro $J0660$ pode refinar futuras buscas.
+                    \item Estratégia baseada em aprendizado de máquina e critérios fotométricos/morfológicos mostrou-se robusta.
+                \end{itemize}
+            \end{splusbox}
+        \end{column}
+    \end{columns}
+\end{frame}
+
+\begin{frame}[c]{Perspectivas e próximos passos}
+    \begin{itemize}
+        \item Solicitação de tempo de observação espectroscópica para confirmar a natureza das novas candidatas a UCDs.
+        \item Observações futuras serão fundamentais para validar propriedades morfológicas e fotométricas, além de fornecer informações adicionais sobre composição e dinâmica.
+        \item Metodologia pode ser aplicada e expandida para outros campos, levantamentos e aglomerados próximos (ex: Hydra).
+        \item Explorar cenários de formação e evolução das UCDs em ambientes menos densos e incluir modelos que considerem crescimento contínuo e eventos de \textit{infall} tardio.
+        \item Busca por objetos compactos com emissão também mostrou-se promissora, podendo ser aplicada em regiões com redshift mais elevado.
+    \end{itemize}
+\end{frame}
+
+\begin{frame}[c]
+    \centering
+    \vspace{2cm}
+    {\LARGE \textbf{Obrigado!}}
+\end{frame}
 
 % \begin{frame}[c]{Redshifts Fotométricos}
 
@@ -908,7 +1509,6 @@
 %     \end{columns}
 % \end{frame}
 
-
 % % Slide 8: Conclusões
 % \begin{frame}[c]{Conclusões}
 %     \begin{splusbox}{Resumo}
@@ -919,9 +1519,6 @@
 %         \end{itemize}
 %     \end{splusbox}
 % \end{frame}
-
-
-
 
 % \section{aaaa}
 % \begin{frame}[c]{Criando o catálogo para treinamento}
